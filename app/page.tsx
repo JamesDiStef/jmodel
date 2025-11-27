@@ -31,10 +31,8 @@ const csvToJson = (csvData: string) => {
 
 const INPUTS = csvToJson(TRAINING_DATA);
 
-// Log the JSON data
-console.log(INPUTS);
-
-
+// Import the client logger component
+import InputsLogger from './components/InputsLogger';
 
 export default function Home() {
   return (
@@ -96,7 +94,12 @@ export default function Home() {
           </a>
         </div>
         <div>
-          {INPUTS.map((item, index) => (<div>got it</div>))}
+          <InputsLogger inputs={INPUTS} />
+          {INPUTS.map((item, index) => (
+            <div key={index}>
+              {JSON.stringify(item)}
+            </div>
+          ))}
         </div>
       </main>
     </div>

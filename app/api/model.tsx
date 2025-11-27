@@ -1,6 +1,8 @@
 import fs from 'fs';
 import path from 'path';
 
+import * as tf from '@tensorflow/tfjs';
+
 // Read CSV from public/data at runtime (Node filesystem)
 const trainingFilePath = path.join(process.cwd(), 'public', 'data', 'superbowloffensivestats.csv');
 let TRAINING_DATA = '';
@@ -31,4 +33,14 @@ const INPUTS = csvToJson(TRAINING_DATA);
 
 // Log the JSON data
 console.log(INPUTS);
+
+const inputs = INPUTS;
+
+const outputs:string[] = [];
+
+tf.util.shuffleCombo(inputs, outputs);
+
+// const INPUTS_TENSOR = tf.tensor2d(inputs);
+
+const OUTPUTS_TENSOR = tf.tensor1d(outputs);
 
